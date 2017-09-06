@@ -1,31 +1,1 @@
-package com.dubbo.controller;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.dubbo.service.TestService;
-
-/**
- * controller
- * @author hwy
- *
- */
-@Controller
-public class MyController {
-	
-	@Autowired
-	private TestService testService;
-	
-	@RequestMapping(value = "/test")
-	@ResponseBody
-	public String testSay(@RequestParam(value = "name",defaultValue = "") String name){
-		StringBuffer sb = new StringBuffer();
-		sb.append("Dubbo: ").append(testService.sayHello(name));
-		return sb.toString();
-	}
-	
-}
-
+package com.dubbo.controller;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Controller;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RequestParam;import org.springframework.web.bind.annotation.ResponseBody;import com.dubbo.service.MenuService;import com.dubbo.service.RoleService;import com.dubbo.service.TestService;import com.dubbo.service.UserService;/** * controller * @author hwy * */@Controllerpublic class MyController {		@Autowired	private TestService testService;		@Autowired	private UserService userService;		@Autowired	private RoleService roleService;		@Autowired	private MenuService menuService;		@RequestMapping(value = "/test")	@ResponseBody	public String testSay(@RequestParam(value = "name",defaultValue = "") String name){		StringBuffer sb = new StringBuffer();		sb.append("Dubbo: ").append(testService.sayHello(name+" \t "));		sb.append("Username: ").append(userService.queryUserList()+" \t ");		sb.append("Role: ").append(roleService.queryAllRoles());		sb.append("Menu: ").append(menuService.queryMenus());		return sb.toString();	}	}
